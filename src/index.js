@@ -11,6 +11,7 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import App from './App';
+
 import * as serviceWorker from './serviceWorker';
 
 const rootReducer = combineReducers({
@@ -19,7 +20,6 @@ const rootReducer = combineReducers({
 });
 
 const store = createStore(rootReducer);
-
 
 ReactDOM.render(
     <Provider store={store} >
