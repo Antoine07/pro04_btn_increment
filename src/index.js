@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom';
 
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 import counterA from './reducers/counterA';
 import counterB from './reducers/counterB';
+import counterC from './reducers/counterC';
+
 import superCounter from './reducers/superCounter';
 import { INCREMENT_A } from './constants/constants';
 import { incrementSuperCounter } from './actions/action-type';
@@ -20,6 +23,7 @@ import * as serviceWorker from './serviceWorker';
 const rootReducer = combineReducers({
     counterA,
     counterB,
+    counterC,
     superCounter
 });
 
@@ -62,7 +66,7 @@ const middlewares = [
     superCounterMiddleware
 ];
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middlewares)));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middlewares, thunk)));
 
 // si on n'utilise pas le dev tools mais vous utilisez uniquement les middlewares
 // const store = createStore(rootReducer, applyMiddleware(...middlewares));
