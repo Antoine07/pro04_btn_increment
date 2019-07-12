@@ -18,9 +18,7 @@ export default (state = stateInit, action = {}) => {
             let sens = state.sens;
 
             if( state.count == 0 ) sens = 1;
-
-            if( state.count > 0 && state.count % 20 == 0 )
-                sens = sens * -1;
+            if(  state.count == 20 ) sens = -1;
             
             newCount = { count: state.count + sens * state.step, sens : sens }
 
