@@ -1,6 +1,7 @@
 import {
     INCREMENT_A, 
-    INCREMENT_B
+    INCREMENT_B,
+    DECREMENT_A
 } from '../constants/constants';
 
 export const incrementA = () => {
@@ -12,5 +13,11 @@ export const incrementA = () => {
 export const incrementB = () => {
     return {
         type: INCREMENT_B
+    }
+};
+
+export const decrementA = () => {
+    return {
+        type: DECREMENT_A
     }
 };

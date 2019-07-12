@@ -3,19 +3,20 @@ import { connect } from 'react-redux';
 
 import {
   incrementA,
-  incrementB
+  incrementB,
+  decrementA
 } from './actions/action-type';
 
 import './App.css';
 
 class App extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
   handleCounterA = () => {
-    this.props.incrementA();
+    this.props.incrementA()
   }
 
   handleCounterB = () => {
@@ -34,7 +35,7 @@ class App extends React.Component {
               <button type="button" class="btn btn-light">{counterA.count}</button>
             </p>
             <p>
-              <button  onClick={this.handleCounterB} type="button" className="btn btn-secondary">Increment +2</button>
+              <button onClick={this.handleCounterB} type="button" className="btn btn-secondary">Increment +2</button>
               <button type="button" class="btn btn-light">{counterB.count}</button>
             </p>
           </div>
@@ -50,7 +51,7 @@ const mapDispatchToProps = (dispatch) => {
     incrementA: () => dispatch(
       incrementA()
     ),
-    incrementB : () => dispatch(
+    incrementB: () => dispatch(
       incrementB()
     )
   }
