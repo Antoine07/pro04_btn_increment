@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 
 import counterA from './reducers/counterA';
@@ -19,10 +19,30 @@ const rootReducer = combineReducers({
     counterB
 });
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+const consoleMiddleware = store => {
 
+    return next => {
+        return action => {
+            console.log('dispatching, dispatch Name :', action.type)
+            const nextAction = next(action)
+            console.log('next state...', store.getState())
 
-const store = createStore(rootReducer, composeEnhancers);
+            return nextAction
+        }
+    }
+}
+
+//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const middlewares = [
+    consoleMiddleware
+];
+
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middlewares)));
+
+// si on n'utilise pas le dev tools mais vous utilisez uniquement les middlewares
+// const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 ReactDOM.render(
     <Provider store={store} >
