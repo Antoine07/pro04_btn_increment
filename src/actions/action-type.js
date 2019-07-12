@@ -1,7 +1,7 @@
 import {
     INCREMENT_A, 
     INCREMENT_B,
-    DECREMENT_A
+    SUPER_INCREMENT
 } from '../constants/constants';
 
 export const incrementA = () => {
@@ -16,8 +16,8 @@ export const incrementB = () => {
     }
 };
 
-export const decrementA = () => {
+export const incrementSuperCounter = () => {
     return {
-        type: DECREMENT_A
+        type: SUPER_INCREMENT
     }
 };

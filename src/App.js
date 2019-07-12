@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import {
   incrementA,
-  incrementB
+  incrementB,
 } from './actions/action-type';
 
 import './App.css';
@@ -23,12 +23,13 @@ class App extends React.Component {
   }
 
   render() {
-    const { counterA, counterB } = this.props;
+    const { counterA, counterB, superCounter } = this.props;
 
     return (
       <div className="container App_btn">
         <div className="row">
           <div className="col-md-12 btn-increment">
+            <p>Super counter A : {superCounter.count} </p>
             <p>
               <button onClick={this.handleCounterA} type="button" className="btn btn-secondary">Increment {counterA.sens == 1? '+' : '-'}1</button>
               <button type="button" class="btn btn-light">{counterA.count}</button>

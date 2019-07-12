@@ -6,6 +6,9 @@ import { Provider } from 'react-redux';
 
 import counterA from './reducers/counterA';
 import counterB from './reducers/counterB';
+import superCounter from './reducers/superCounter';
+import { INCREMENT_A } from './constants/constants';
+import { incrementSuperCounter } from './actions/action-type';
 
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,7 +19,8 @@ import * as serviceWorker from './serviceWorker';
 
 const rootReducer = combineReducers({
     counterA,
-    counterB
+    counterB,
+    superCounter
 });
 
 const consoleMiddleware = store => {
@@ -32,11 +36,30 @@ const consoleMiddleware = store => {
     }
 }
 
+const superCounterMiddleware = store => {
+
+    return next => {
+        return action => {
+
+            const nextAction = next(action);
+
+            if( action.type === INCREMENT_A ){
+                const { counterA } = store.getState();
+
+                if( counterA.count == 20 ){ store.dispatch( incrementSuperCounter() )}
+            }  
+
+            return nextAction
+        }
+    }
+}
+
 //const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const middlewares = [
-    consoleMiddleware
+    // consoleMiddleware,
+    superCounterMiddleware
 ];
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middlewares)));
